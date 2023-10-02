@@ -41,11 +41,11 @@ export function Header() {
   ]
 
   return (
-    <main className="ds-navbar flex justify-between bg-base-300 lg:px-10">
+    <main className="navbar flex justify-between bg-base-300 lg:px-10">
       <h1 className="font-semibold text-primary">Daniela Chaves</h1>
       <select
         data-choose-theme
-        className="select-sm ds-select ds-select-secondary h-[20px] max-w-xs py-0 text-sm capitalize"
+        className="select select-secondary select-sm h-[20px] max-w-xs py-0 text-sm capitalize"
       >
         <option selected disabled>
           Escolha um tema :)

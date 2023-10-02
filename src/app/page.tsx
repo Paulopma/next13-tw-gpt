@@ -11,9 +11,11 @@ export default function Home() {
   const [imagesBlob, setImagesBlob] = useState<Blob[]>([])
   const [activeTab, setActiveTab] = useState(1)
   const [name, setName] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
   function sendMessage() {
+    setIsLoading(true)
     fetch('http://pop-os:3000/api/cast-listing', {
       method: 'POST',
       headers: {
@@ -26,8 +28,10 @@ export default function Home() {
       })
       .then((response) => {
         treatResponse(response)
+        setIsLoading(false)
       })
       .catch((error) => {
+        setIsLoading(false)
         console.log(error)
       })
   }
@@ -124,20 +128,17 @@ export default function Home() {
   return (
     <main className="items-center p-5 lg:flex lg:items-start lg:justify-around">
       <div className="mb-3 flex w-full justify-center lg:hidden">
-        <div className="ds-tabs ds-tabs-boxed w-fit">
+        {/* eslint-disable-next-line prettier/prettier */}
+        <div className="tabs tabs-boxed w-fit">
           <a
             onClick={() => setActiveTab(1)}
-            className={cn(
-              `ds-tab px-10 ${activeTab === 1 ? 'ds-tab-active' : ''}`,
-            )}
+            className={cn(`tab px-10 ${activeTab === 1 ? 'tab-active' : ''}`)}
           >
             Texto
           </a>
           <a
             onClick={() => setActiveTab(2)}
-            className={cn(
-              `ds-tab px-10 ${activeTab === 2 ? 'ds-tab-active' : ''}`,
-            )}
+            className={cn(`tab px-10 ${activeTab === 2 ? 'tab-active' : ''}`)}
           >
             Fotos
           </a>
@@ -148,15 +149,13 @@ export default function Home() {
           <div className="flex flex-col items-center gap-4">
             <textarea
               onChange={(e) => setMessage(e.target.value)}
-              className="ds-textarea ds-textarea-secondary w-full"
+              className="textarea textarea-secondary w-full"
               placeholder="Insira o texto"
               cols={30}
               rows={10}
             ></textarea>
-            <button
-              onClick={sendMessage}
-              className="ds-btn ds-btn-primary ds-btn-md"
-            >
+            <button onClick={sendMessage} className="btn btn-primary btn-md">
+              {isLoading && <span className="loading loading-spinner"></span>}
               Fazer a mágica 🪄
             </button>
           </div>
