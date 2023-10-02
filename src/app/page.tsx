@@ -12,7 +12,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState(1)
   const [name, setName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  const [screenWidth, setScreenWidth] = useState(0)
 
   function sendMessage() {
     setIsLoading(true)
