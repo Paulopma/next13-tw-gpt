@@ -13,10 +13,11 @@ export default function Home() {
   const [name, setName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [screenWidth, setScreenWidth] = useState(0)
+  const [hostUrl, setHostUrl] = useState('')
 
   function sendMessage() {
     setIsLoading(true)
-    fetch('http://pop-os:3000/api/cast-listing', {
+    fetch(`http://${hostUrl}/api/cast-listing`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -119,6 +120,8 @@ export default function Home() {
       setScreenWidth(window.innerWidth)
     }
     window.addEventListener('resize', handleResize)
+    const host = window.location.hostname
+    setHostUrl(host)
 
     return () => {
       window.removeEventListener('resize', handleResize)
