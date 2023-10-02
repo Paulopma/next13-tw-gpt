@@ -17,7 +17,7 @@ export default function Home() {
 
   function sendMessage() {
     setIsLoading(true)
-    fetch(`http://${hostUrl}/api/cast-listing`, {
+    fetch(`${hostUrl}/api/cast-listing`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ export default function Home() {
       setScreenWidth(window.innerWidth)
     }
     window.addEventListener('resize', handleResize)
-    const host = window.location.hostname
+    const host = window.location.href
     setHostUrl(host)
 
     return () => {
